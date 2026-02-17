@@ -1,82 +1,82 @@
 # Laravel Debugbar MCP Server
 
-MCP (Model Context Protocol) сервер для анализа логов Laravel Debugbar. Позволяет ИИ-агентам получать доступ к данным отладки Laravel через стандартизированный протокол.
+MCP (Model Context Protocol) server for analyzing Laravel Debugbar logs. Allows AI agents to access Laravel debugging data through a standardized protocol.
 
-## Версия: 1.0.0
+## Version: 1.0.0
 
-**Автор:** Sergey O (@Sergey0002)  
+**Author:** Sergey O (@Sergey0002)  
 **Telegram:** @Sergey0002  
 **GitHub:** https://github.com/sergey0002/laravel-debuger-mcp
 
 ---
 
-## ⚠️ ВАЖНО: Ограничения использования
+## ⚠️ IMPORTANT: Usage Restrictions
 
-Данное ПО предназначено **исключительно для использования на локальном сервере разработчика**.
+This software is intended **exclusively for use on a local developer server**.
 
-**ЗАПРЕЩАЕТСЯ:**
-- Размещение на публичных серверах
-- Размещение на production-серверах
+**PROHIBITED:**
+- Deployment on public servers
+- Deployment on production servers
 
 ---
 
-## Совместимость
+## Compatibility
 
-Протестировано и работает с:
+Tested and works with:
 - **Laravel**: 7.x, 8.x, 9.x, 10.x, 11.x, 12.x
 - **PHP**: 8.0+
 - **Laravel Debugbar**: 3.x+
 
 ---
 
-## Установка
+## Installation
 
-### Шаг 1: Создание папки
+### Step 1: Create Folder
 
-Создайте папку `.ladebugermcp` в корне вашего Laravel проекта:
+Create a `.ladebugermcp` folder in your Laravel project root:
 
 ```bash
 mkdir .ladebugermcp
 ```
 
-### Шаг 2: Скачивание файла
+### Step 2: Download File
 
-Скачайте файл `mcp-server.php` и поместите его в созданную папку:
+Download `mcp-server.php` and place it in the created folder:
 
 ```
-ваш-laravel-проект/
+your-laravel-project/
 ├── .ladebugermcp/
-│   └── mcp-server.php    ← Файл MCP сервера
+│   └── mcp-server.php    ← MCP server file
 ├── app/
 ├── storage/
-│   └── debugbar/         ← Логи Debugbar (автоматически)
+│   └── debugbar/         ← Debugbar logs (automatic)
 └── ...
 ```
 
-### Шаг 3: Добавление в Git Ignore (ОБЯЗАТЕЛЬНО!)
+### Step 3: Add to Git Ignore (REQUIRED!)
 
-**Важно!** Добавьте папку в локальный git ignore, чтобы случайно не опубликовать её:
+**Important!** Add the folder to your local git ignore to prevent accidental publication:
 
-**Вариант A: Локальный exclude (рекомендуется)**
+**Option A: Local exclude (recommended)**
 ```bash
 echo "/.ladebugermcp/" >> .git/info/exclude
 ```
 
-**Вариант B: В .gitignore проекта**
+**Option B: In project .gitignore**
 ```gitignore
-# MCP сервер Debugbar (локальный инструмент разработки)
+# MCP Debugbar server (local development tool)
 .ladebugermcp/
 ```
 
-Это предотвратит случайную публикацию конфиденциальных данных отладки в публичных репозиториях.
+This prevents accidental publication of sensitive debugging data in public repositories.
 
 ---
 
-## Настройка MCP
+## MCP Configuration
 
-### Для Kilo Code
+### For Kilo Code
 
-Добавьте конфигурацию в файл `.kilocode/mcp.json` в корне проекта:
+Add configuration to `.kilocode/mcp.json` in your project root:
 
 ```json
 {
@@ -90,9 +90,9 @@ echo "/.ladebugermcp/" >> .git/info/exclude
 }
 ```
 
-### Для VS Code (Cline, Roo Code и др.)
+### For VS Code (Cline, Roo Code, etc.)
 
-Добавьте конфигурацию в настройки MCP:
+Add configuration to MCP settings:
 
 **Windows:**
 ```json
@@ -100,7 +100,7 @@ echo "/.ladebugermcp/" >> .git/info/exclude
   "mcpServers": {
     "laravel-debug": {
       "command": "C:\\laragon\\bin\\php\\php-8.2.30-nts-Win32-vs16-x64\\php.exe",
-      "args": ["C:\\путь\\к\\проекту\\.ladebugermcp\\mcp-server.php"],
+      "args": ["C:\\path\\to\\project\\.ladebugermcp\\mcp-server.php"],
       "disabled": false
     }
   }
@@ -113,28 +113,28 @@ echo "/.ladebugermcp/" >> .git/info/exclude
   "mcpServers": {
     "laravel-debug": {
       "command": "php",
-      "args": ["/путь/к/проекту/.ladebugermcp/mcp-server.php"],
+      "args": ["/path/to/project/.ladebugermcp/mcp-server.php"],
       "disabled": false
     }
   }
 }
 ```
 
-### Важно о путях
+### Important Notes About Paths
 
-- **`command`** — полный путь к исполняемому файлу PHP
-- **`args`** — путь к файлу `mcp-server.php` (относительный или абсолютный)
-- После изменения конфигурации **перезапустите VS Code**
+- **`command`** — full path to PHP executable
+- **`args`** — path to `mcp-server.php` (relative or absolute)
+- After changing configuration **restart VS Code**
 
 ---
 
-## Требования
+## Requirements
 
 - **PHP** 8.0+
-- **Laravel** с установленным [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar)
-- Логи Debugbar должны сохраняться в `storage/debugbar/*.json`
+- **Laravel** with [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar) installed
+- Debugbar logs must be saved to `storage/debugbar/*.json`
 
-### Установка Laravel Debugbar
+### Install Laravel Debugbar
 
 ```bash
 composer require barryvdh/laravel-debugbar --dev
@@ -142,28 +142,28 @@ composer require barryvdh/laravel-debugbar --dev
 
 ---
 
-## Инструменты
+## Tools
 
 ### `debugbar_clear`
 
-Очищает все логи Debugbar.
+Clears all Debugbar logs.
 
 ```
-Параметры: нет
-Возвращает: "Очищено файлов: N"
+Parameters: none
+Returns: "Cleared files: N"
 ```
 
 ### `debugbar_get_request_tree`
 
-Возвращает иерархическое дерево последних запросов.
+Returns hierarchical tree of recent requests.
 
-| Параметр | Тип | По умолчанию | Описание |
+| Parameter | Type | Default | Description |
 |----------|-----|--------------|----------|
-| `limit` | integer | 50 | Количество логов |
-| `include_session` | boolean | false | Включить данные сессии |
-| `include_cookies` | boolean | false | Включить cookies |
+| `limit` | integer | 50 | Number of logs |
+| `include_session` | boolean | false | Include session data |
+| `include_cookies` | boolean | false | Include cookies |
 
-**Пример ответа:**
+**Example response:**
 
 ```json
 {
@@ -184,27 +184,27 @@ composer require barryvdh/laravel-debugbar --dev
 
 ### `debugbar_get_logs`
 
-Получает детальные структурированные отчёты по логам.
+Gets detailed structured reports from logs.
 
-| Параметр | Тип | По умолчанию | Описание |
+| Parameter | Type | Default | Description |
 |----------|-----|--------------|----------|
-| `log_ids` | array | [] | ID логов (если пусто - последние) |
-| `limit` | integer | 10 | Количество логов |
-| `sections` | array | models, views, route, exceptions, messages, gate | Секции для извлечения |
+| `log_ids` | array | [] | Log IDs (if empty - recent) |
+| `limit` | integer | 10 | Number of logs |
+| `sections` | array | models, views, route, exceptions, messages, gate | Sections to extract |
 
-**Доступные секции:**
+**Available sections:**
 
-- `meta` - ID, URL, method, status, datetime (всегда включена)
-- `models` - модели Eloquent (retrieved/created/updated/deleted)
-- `views` - шаблоны Blade с render_count
-- `queries` - SQL запросы с duration и source
-- `route` - контроллер, URI, action
-- `exceptions` - ошибки
-- `messages` - Log сообщения
-- `gate` - проверки прав
-- `session` - данные сессии (отключена по умолчанию из-за объёма)
+- `meta` - ID, URL, method, status, datetime (always included)
+- `models` - Eloquent models (retrieved/created/updated/deleted)
+- `views` - Blade templates with render_count
+- `queries` - SQL queries with duration and source
+- `route` - controller, URI, action
+- `exceptions` - errors
+- `messages` - Log messages
+- `gate` - authorization checks
+- `session` - session data (disabled by default due to size)
 
-**Пример:**
+**Example:**
 
 ```json
 {
@@ -228,89 +228,89 @@ composer require barryvdh/laravel-debugbar --dev
 
 ---
 
-## Сценарий использования: Браузерное тестирование
+## Usage Scenario: Browser Testing
 
-### Протокол отладки
+### Debugging Protocol
 
-Используйте этот протокол для систематического анализа проблем через браузерное тестирование:
+Use this protocol for systematic problem analysis through browser testing:
 
-#### 1. Очистка логов (обязательно перед тестом)
-
-```
-Вызов: debugbar_clear
-Результат: "Очищено файлов: N"
-```
-
-#### 2. Запрос на выполнение действий
-
-Попросите пользователя выполнить конкретное действие в браузере:
-
-**Примеры запросов:**
-- "Откройте страницу /crm/orders и нажмите кнопку 'Экспорт'"
-- "Перейдите в раздел отчётов и примените фильтр по дате"
-- "Создайте новый заказ через форму"
-
-#### 3. Получение дерева запросов
+#### 1. Clear Logs (required before test)
 
 ```
-Вызов: debugbar_get_request_tree
-Параметры: { "limit": 20 }
+Call: debugbar_clear
+Result: "Cleared files: N"
 ```
 
-**Анализ дерева:**
-- Найдите целевой запрос по URL
-- Проверьте HTTP статус (200, 302, 500)
-- Изучите parent-child связи (referer → location)
+#### 2. Request Action
 
-#### 4. Детальный анализ логов
+Ask the user to perform a specific action in the browser:
+
+**Example requests:**
+- "Open the /crm/orders page and click the 'Export' button"
+- "Go to the reports section and apply a date filter"
+- "Create a new order through the form"
+
+#### 3. Get Request Tree
 
 ```
-Вызов: debugbar_get_logs
-Параметры: { "sections": ["queries", "models", "exceptions"] }
+Call: debugbar_get_request_tree
+Parameters: { "limit": 20 }
 ```
 
-### Типичные сценарии
+**Tree analysis:**
+- Find the target request by URL
+- Check HTTP status (200, 302, 500)
+- Study parent-child relationships (referer → location)
 
-| Проблема | Секции для анализа | Что искать |
+#### 4. Detailed Log Analysis
+
+```
+Call: debugbar_get_logs
+Parameters: { "sections": ["queries", "models", "exceptions"] }
+```
+
+### Typical Scenarios
+
+| Problem | Sections to Analyze | What to Look For |
 |----------|-------------------|------------|
-| Медленная страница | `queries`, `models`, `views` | SQL с duration > 100ms, N+1 (retrieved > 100) |
-| Ошибка 500 | `exceptions`, `route` | message, file, line в exceptions |
-| Лишние редиректы | дерево запросов | цепочка referer → location |
-| Проблемы прав | `gate`, `route` | проверки gate, контроллер |
+| Slow page | `queries`, `models`, `views` | SQL with duration > 100ms, N+1 (retrieved > 100) |
+| Error 500 | `exceptions`, `route` | message, file, line in exceptions |
+| Extra redirects | request tree | referer → location chain |
+| Permission issues | `gate`, `route` | gate checks, controller |
 
 ---
 
-## Пример настройки rules для команды "браузерное тестирование"
+## Example Rules Configuration
 
-Добавьте в ваш файл правил (например, `.kilocode/rules/Правила.md`):
+Add to your rules file (e.g., `.kilocode/rules/Правила.md`):
 
 ```markdown
-### MCP Laravel Debug (Отладка и Логи)
-Прямой доступ к логам Debugbar через `.ladebugermcp/mcp-server.php`.
+### MCP Laravel Debug (Debugging and Logs)
+Direct access to Debugbar logs via `.ladebugermcp/mcp-server.php`.
 
-**Протокол отладки**:
-1. **Очистка**: Перед началом теста всегда вызывай `debugbar_clear`
-2. **Тест**: Попроси пользователя выполнить конкретное действие в браузере
-3. **Анализ**: Используй `debugbar_get_request_tree` для анализа цепочки запросов
-4. **Детали**: При обнаружении аномалий используй `debugbar_get_logs`
+**Debugging Protocol**:
+1. **Clear**: Always call `debugbar_clear` before starting a test
+2. **Test**: Ask the user to perform a specific action in the browser
+3. **Analyze**: Use `debugbar_get_request_tree` to analyze the request chain
+4. **Details**: Use `debugbar_get_logs` when anomalies are found
 
-**Типичные сценарии**:
-- **Медленная страница**: `queries`, `models`, `views` — найти медленные SQL и N+1 проблемы
-- **Ошибка 500**: `exceptions`, `route` — изучить стек ошибки и контроллер
-- **Редиректы**: анализировать `referer` → `location` цепочки в дереве запросов
-- **Права доступа**: `gate`, `route` — проверить проверки авторизации
+**Typical Scenarios**:
+- **Slow page**: `queries`, `models`, `views` — find slow SQL and N+1 issues
+- **Error 500**: `exceptions`, `route` — study error stack and controller
+- **Redirects**: analyze `referer` → `location` chains in request tree
+- **Access rights**: `gate`, `route` — check authorization
 
-**Советы**:
-- Не запрашивай `session` без необходимости — большой объём данных
-- Анализируй queries с `duration > 100ms` — потенциальные проблемы
-- Проверяй models с `retrieved > 100` — возможные N+1 проблемы
+**Tips**:
+- Don't request `session` without necessity — large data volume
+- Analyze queries with `duration > 100ms` — potential issues
+- Check models with `retrieved > 100` — possible N+1 issues
 ```
 
 ---
 
-## Протокол MCP
+## MCP Protocol
 
-Сервер реализует JSON-RPC 2.0 протокол:
+Server implements JSON-RPC 2.0 protocol:
 
 ### initialize
 
@@ -340,13 +340,19 @@ composer require barryvdh/laravel-debugbar --dev
 
 ---
 
-## Лицензия
+## License
 
-MIT License с дополнительными ограничениями. См. файл [LICENSE](LICENSE).
+MIT License with additional restrictions. See [LICENSE](LICENSE) file.
 
-**Используйте на свой страх и риск.**
+**Use at your own risk.**
 
 ---
 
-**Автор:** Sergey O (@Sergey0002)  
+**Author:** Sergey O (@Sergey0002)  
 **Telegram:** @Sergey0002
+
+---
+
+## Документация на русском языке
+
+Полная документация на русском языке доступна в файле [README.ru.md](README.ru.md)
