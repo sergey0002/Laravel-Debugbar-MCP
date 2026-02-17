@@ -1,0 +1,16 @@
+# Логи ошибок
+error.log
+
+# Временные файлы
+*.tmp
+*.bak
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
