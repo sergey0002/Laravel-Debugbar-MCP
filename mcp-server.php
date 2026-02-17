@@ -1,8 +1,16 @@
 <?php
 
 /**
- * Laravel Debugbar MCP Server v2.8.0
+ * Laravel Debugbar MCP Server v1.0.0
  * Реализация протокола Модельного Контекста (MCP) для анализа логов Laravel Debugbar.
+ * 
+ * @author  Sergey O (@Sergey0002)
+ * @telegram @Sergey0002
+ * @github  https://github.com/sergey0002/laravel-debuger-mcp
+ * @license MIT with Additional Restrictions (see LICENSE)
+ * 
+ * ⚠️ ВНИМАНИЕ: Только для локального сервера разработчика!
+ * Не размещайте на публичных или production серверах.
  */
 
 set_error_handler(function ($errno, $errstr, $errfile, $errline) {
@@ -60,7 +68,9 @@ while ($line = fgets(STDIN)) {
                         ],
                         'serverInfo' => [
                             'name' => 'laravel-debugbar-mcp',
-                            'version' => '2.8.0'
+                            'version' => '1.0.0',
+                            'author' => 'Sergey O (@Sergey0002)',
+                            'telegram' => '@Sergey0002'
                         ]
                     ]
                 ]);

@@ -2,7 +2,30 @@
 
 MCP (Model Context Protocol) сервер для анализа логов Laravel Debugbar. Позволяет ИИ-агентам получать доступ к данным отладки Laravel через стандартизированный протокол.
 
-## Версия: 2.8.0
+## Версия: 1.0.0
+
+**Автор:** Sergey O (@Sergey0002)  
+**Telegram:** @Sergey0002  
+**GitHub:** https://github.com/sergey0002/laravel-debuger-mcp
+
+---
+
+## ⚠️ ВАЖНО: Ограничения использования
+
+Данное ПО предназначено **исключительно для использования на локальном сервере разработчика**.
+
+**ЗАПРЕЩАЕТСЯ:**
+- Размещение на публичных серверах
+- Размещение на production-серверах
+
+**Обязательно добавьте в `.git/info/exclude` или `.gitignore`:**
+```gitignore
+.ladebugermcp/
+```
+
+Это предотвратит случайную публикацию конфиденциальных данных отладки.
+
+---
 
 ## Возможности
 
@@ -162,8 +185,8 @@ git clone https://github.com/sergey0002/laravel-debuger-mcp.git
 .ladebugermcp/
 ├── mcp-server.php      # Основной файл сервера
 ├── README.md           # Документация
-├── LICENSE             # MIT лицензия
-└── error.log           # Лог ошибок (создаётся автоматически)
+├── LICENSE             # Лицензия с ограничениями
+└── .gitignore          # Исключения для git
 ```
 
 ### Добавление новых инструментов
@@ -174,13 +197,11 @@ git clone https://github.com/sergey0002/laravel-debuger-mcp.git
 
 ## Лицензия
 
-MIT License
+MIT License с дополнительными ограничениями. См. файл [LICENSE](LICENSE).
 
-## Автор
+**Используйте на свой страх и риск.**
 
-Sergey
+---
 
-## Ссылки
-
-- [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar)
-- [Model Context Protocol](https://modelcontextprotocol.io/)
+**Автор:** Sergey O (@Sergey0002)  
+**Telegram:** @Sergey0002
