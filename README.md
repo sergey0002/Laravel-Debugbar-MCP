@@ -18,50 +18,120 @@ MCP (Model Context Protocol) сервер для анализа логов Larav
 - Размещение на публичных серверах
 - Размещение на production-серверах
 
-**Обязательно добавьте в `.git/info/exclude` или `.gitignore`:**
-```gitignore
-.ladebugermcp/
-```
-
-Это предотвратит случайную публикацию конфиденциальных данных отладки.
-
 ---
-
-## Возможности
-
-- **Дерево запросов** - иерархическое отображение HTTP запросов с parent-child связями
-- **Детальные логи** - модели, views, SQL запросы, исключения, сообщения
-- **Очистка логов** - удаление всех файлов debugbar
 
 ## Установка
 
-### 1. Клонирование
+### Шаг 1: Создание папки
+
+Создайте папку `.ladebugermcp` в корне вашего Laravel проекта:
 
 ```bash
-git clone https://github.com/sergey0002/laravel-debuger-mcp.git
+mkdir .ladebugermcp
 ```
 
-### 2. Настройка в Kilo Code / VS Code
+### Шаг 2: Скачивание файла
 
-Добавьте в `.kilocode/mcp.json` или `mcp_settings.json`:
+Скачайте файл `mcp-server.php` и поместите его в созданную папку:
+
+```
+ваш-laravel-проект/
+├── .ladebugermcp/
+│   └── mcp-server.php    ← Файл MCP сервера
+├── app/
+├── storage/
+│   └── debugbar/         ← Логи Debugbar (автоматически)
+└── ...
+```
+
+### Шаг 3: Добавление в Git Ignore (ОБЯЗАТЕЛЬНО!)
+
+**Важно!** Добавьте папку в локальный git ignore, чтобы случайно не опубликовать её:
+
+**Вариант A: Локальный exclude (рекомендуется)**
+```bash
+echo "/.ladebugermcp/" >> .git/info/exclude
+```
+
+**Вариант B: В .gitignore проекта**
+```gitignore
+# MCP сервер Debugbar (локальный инструмент разработки)
+.ladebugermcp/
+```
+
+Это предотвратит случайную публикацию конфиденциальных данных отладки в публичных репозиториях.
+
+---
+
+## Настройка MCP
+
+### Для Kilo Code
+
+Добавьте конфигурацию в файл `.kilocode/mcp.json` в корне проекта:
 
 ```json
 {
   "mcpServers": {
     "laravel-debug": {
       "command": "C:\\laragon\\bin\\php\\php-8.2.30-nts-Win32-vs16-x64\\php.exe",
-      "args": ["путь/к/mcp-server.php"],
+      "args": [".ladebugermcp/mcp-server.php"],
       "disabled": false
     }
   }
 }
 ```
 
-### 3. Требования
+### Для VS Code (Cline, Roo Code и др.)
 
-- PHP 8.0+
-- Laravel с установленным [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar)
-- Путь к логам: `storage/debugbar/*.json`
+Добавьте конфигурацию в настройки MCP:
+
+**Windows:**
+```json
+{
+  "mcpServers": {
+    "laravel-debug": {
+      "command": "C:\\laragon\\bin\\php\\php-8.2.30-nts-Win32-vs16-x64\\php.exe",
+      "args": ["C:\\путь\\к\\проекту\\.ladebugermcp\\mcp-server.php"],
+      "disabled": false
+    }
+  }
+}
+```
+
+**Linux/macOS:**
+```json
+{
+  "mcpServers": {
+    "laravel-debug": {
+      "command": "php",
+      "args": ["/путь/к/проекту/.ladebugermcp/mcp-server.php"],
+      "disabled": false
+    }
+  }
+}
+```
+
+### Важно о путях
+
+- **`command`** — полный путь к исполняемому файлу PHP
+- **`args`** — путь к файлу `mcp-server.php` (относительный или абсолютный)
+- После изменения конфигурации **перезапустите VS Code**
+
+---
+
+## Требования
+
+- **PHP** 8.0+
+- **Laravel** с установленным [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar)
+- Логи Debugbar должны сохраняться в `storage/debugbar/*.json`
+
+### Установка Laravel Debugbar
+
+```bash
+composer require barryvdh/laravel-debugbar --dev
+```
+
+---
 
 ## Инструменты
 
@@ -147,6 +217,8 @@ git clone https://github.com/sergey0002/laravel-debuger-mcp.git
 }
 ```
 
+---
+
 ## Протокол MCP
 
 Сервер реализует JSON-RPC 2.0 протокол:
@@ -177,6 +249,8 @@ git clone https://github.com/sergey0002/laravel-debuger-mcp.git
 }
 ```
 
+---
+
 ## Разработка
 
 ### Структура файлов
@@ -194,6 +268,8 @@ git clone https://github.com/sergey0002/laravel-debuger-mcp.git
 1. Добавьте описание в `tools/list`
 2. Добавьте обработчик в `handleToolCall()`
 3. Реализуйте функцию извлечения данных
+
+---
 
 ## Лицензия
 
