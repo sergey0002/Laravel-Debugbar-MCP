@@ -6,7 +6,7 @@ MCP (Model Context Protocol) server for analyzing Laravel Debugbar logs. Allows 
 
 **Author:** Sergey O (@Sergey0002)  
 **Telegram:** @Sergey0002  
-**GitHub:** https://github.com/sergey0002/laravel-debuger-mcp
+**GitHub:** https://github.com/sergey0002/Laravel-Debugbar-MCP
 
 ---
 

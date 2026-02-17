@@ -6,7 +6,7 @@
  * 
  * @author  Sergey O (@Sergey0002)
  * @telegram @Sergey0002
- * @github  https://github.com/sergey0002/laravel-debuger-mcp
+ * @github  https://github.com/sergey0002/Laravel-Debugbar-MCP
  * @license MIT with Additional Restrictions (see LICENSE)
  * 
  * ⚠️ ВНИМАНИЕ: Только для локального сервера разработчика!
